@@ -2,7 +2,17 @@
 
 > 一条主线讲透 AI 为什么突然能「做事」了：从 Transformer 到 Agent 工程体系，配上 Three.js 粒子背景、SVG 动画图解和可交互的演示。
 
-![License](https://img.shields.io/badge/license-MIT-green) ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![CI](https://github.com/OWNER/ai-learning-platform/actions/workflows/ci.yml/badge.svg) ![License](https://img.shields.io/badge/license-MIT-green) ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOWNER%2Fai-learning-platform)
+
+## 🖼 截图
+
+| 首页 | Agent 循环实时演示 |
+|---|---|
+| ![首页](docs/screenshots/hero.png) | ![Agent 循环演示](docs/screenshots/agent-loop.png) |
+| **六大工程组件** | **RAG 检索流水线交互演示** |
+| ![六大组件](docs/screenshots/stack.png) | ![RAG 演示](docs/screenshots/rag-demo.png) |
 
 ## ✨ 这是什么
 
@@ -79,7 +89,14 @@ src/
 - [ ] 英文版内容（i18n）
 - [ ] 概念章节的课后小测
 
-欢迎 PR：内容纠错、新概念章节、新交互演示都在欢迎之列——内容类改动请保持「正反方辩论 + 类比」的体例。
+欢迎 PR：内容纠错、新概念章节、新交互演示都在欢迎之列——内容类改动请保持「正反方辩论 + 类比」的体例，详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+
+## 🤝 社区
+
+- 贡献流程与内容体例：[CONTRIBUTING.md](./CONTRIBUTING.md)
+- 行为准则：[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
+- 版本历史：[CHANGELOG.md](./CHANGELOG.md)
+- 内容纠错 / 新章节建议：[Content issue](../../issues/new?template=content_suggestion.md) · Bug：[Bug report](../../issues/new?template=bug_report.md)
 
 ## 📄 License
 
