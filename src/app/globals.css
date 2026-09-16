@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-night-950 text-slate-200 antialiased;
+}
+
+::selection {
+  @apply bg-aurora-violet/40 text-white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-night-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-night-600 rounded-full;
+  &:hover {
+    @apply bg-aurora-violet/60;
+  }
+}
+
+/* 章节导航锚点偏移 */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+/* ===== SVG 动画 keyframes ===== */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes scale-in-out {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+@keyframes wing-flap {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-18deg); }
+}
+
+.svg-dash {
+  stroke-dasharray: 6 6;
+  animation: dash-flow 1.6s linear infinite;
+}
+.svg-float {
+  animation: float-y 3s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-spin-slow {
+  animation: spin-slow 14s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-glow {
+  animation: glow-pulse 2.4s ease-in-out infinite;
+}
+.svg-breathe {
+  animation: scale-in-out 2.8s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-wing {
+  animation: wing-flap 0.9s ease-in-out infinite;
+  transform-origin: right center;
+  transform-box: fill-box;
+}
+
