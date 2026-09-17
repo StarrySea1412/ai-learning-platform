@@ -103,21 +103,19 @@ function Particles() {
       <points ref={ref} geometry={geometry}>
         <pointsMaterial
           size={0.055}
-          color="#67e8f9"
+          color="#0891b2"
           transparent
-          opacity={0.75}
+          opacity={0.5}
           sizeAttenuation
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
         />
       </points>
       <lineSegments ref={lineRef} geometry={lineGeo}>
         <lineBasicMaterial
-          color="#38bdf8"
+          color="#7c3aed"
           transparent
-          opacity={0.14}
+          opacity={0.1}
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
         />
       </lineSegments>
     </group>

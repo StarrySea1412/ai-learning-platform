@@ -16,7 +16,7 @@ export const STACK_A: StackItem[] = [
     icon: "🔄",
     name: "Agent 循环",
     en: "Agent Loop",
-    color: "#a78bfa",
+    color: "#7c3aed",
     tagline: "整个 Agentic AI 的心脏：一段 while 循环",
     what:
       "Agent 的本质小到惊人：while(未完成) { 上下文 → 模型 → 工具调用 → 结果回填 }。模型只负责「决定下一步」，循环体负责让决定真实发生。所有 Agent 框架（LangChain、Manus、Claude Code）都是这段循环的工程化包装。",
@@ -36,7 +36,7 @@ export const STACK_A: StackItem[] = [
     icon: "🔧",
     name: "工具与函数调用",
     en: "Function Calling / Tools",
-    color: "#fbbf24",
+    color: "#d97706",
     tagline: "模型的手：从「说」到「做」的标准化接口",
     what:
       "Function Calling 是 2023 年起形成的标准协议：你把工具的名称、用途、JSON Schema 参数描述发给模型；模型不直接执行，而是输出一个结构化的 tool_call（JSON）；由你的代码执行后把结果作为 tool_result 回填。模型是「点菜的人」，harness 是「厨房」。",
@@ -57,7 +57,7 @@ export const STACK_A: StackItem[] = [
     icon: "🔌",
     name: "模型上下文协议",
     en: "MCP · Model Context Protocol",
-    color: "#22d3ee",
+    color: "#0891b2",
     tagline: "AI 应用的 USB-C：把 N×M 集成变成 N+M",
     what:
       "Anthropic 2024.11 发布的开放协议，标准化模型与外部工具/数据源的连接方式。基于 JSON-RPC 2.0，client-server 架构——Host（Claude Code、IDE、你的应用）内嵌 MCP Client，与独立的 MCP Server（文件系统、GitHub、数据库、浏览器……）通信。没有 MCP：M 个应用 × N 个工具要写 M×N 个适配器；有了 MCP：工具方写一次 Server，应用方实现一次 Client，即插即用。",
@@ -81,7 +81,7 @@ export const STACK_B: StackItem[] = [
     icon: "🧠",
     name: "记忆系统",
     en: "Memory",
-    color: "#f472b6",
+    color: "#db2777",
     tagline: "给没有海马体的模型装上长期记忆",
     what:
       "LLM 的「记忆」只有上下文窗口——会话结束即失忆。Memory 系统解决「跨会话、跨任务记住并回忆」：短期记忆靠工作窗口与任务备忘（scratchpad），长期记忆靠外部存储（向量库/数据库/记忆文件），按需检索回填。Claude Code 的 CLAUDE.md/auto-memory、ChatGPT 的 Memory、MemGPT/Letta 的分层记忆都是这一层的产品化。",
@@ -102,7 +102,7 @@ export const STACK_B: StackItem[] = [
     icon: "📐",
     name: "上下文控制",
     en: "Context Control / Engineering",
-    color: "#34d399",
+    color: "#059669",
     tagline: "有限窗口里的信息调度艺术",
     what:
       "上下文窗口是 Agent 唯一的工作记忆，也是最容易浪费的资源。上下文工程 = 决定「每一轮把什么放进窗口」：系统提示、工具定义、历史消息、检索内容、工具结果的取舍与压缩。Anthropic 的四字诀：Write（落盘卸载）、Select（检索注入）、Compress（摘要压缩）、Isolate（子代理隔离）。",
@@ -123,7 +123,7 @@ export const STACK_B: StackItem[] = [
     icon: "📚",
     name: "知识库与向量索引",
     en: "RAG / Vector Index",
-    color: "#60a5fa",
+    color: "#2563eb",
     tagline: "旁路的知识：不改模型，给它外接图书馆",
     what:
       "RAG（检索增强生成）= 回答前先从外部知识库检索相关片段，塞进上下文再生成。向量索引是它的核心基建：文本切块 → embedding 模型编码成向量 → 存入向量数据库（HNSW/IVF 索引）→ 查询时把问题也编码成向量，按余弦相似度召回 top-k。它解决两个模型原生缺陷：知识过时（训练截止之后的事它不知道）、知识私有（你的内部文档不在权重里）。",

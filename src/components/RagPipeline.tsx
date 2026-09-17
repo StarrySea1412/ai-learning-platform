@@ -85,16 +85,16 @@ const SCENARIOS: Scenario[] = [
 /* ---------- 流水线阶段 ---------- */
 
 const RAW_STAGES = [
-  { key: "ask", title: "提问", icon: "🧑‍💻", color: "#22d3ee", detail: "问题直接进入模型——窗口里只有问题本身" },
-  { key: "gen", title: "生成回答", icon: "🧠", color: "#f472b6", detail: "模型只能用「权重里的记忆」作答：训练截止日期 + 公开语料" },
+  { key: "ask", title: "提问", icon: "🧑‍💻", color: "#0891b2", detail: "问题直接进入模型——窗口里只有问题本身" },
+  { key: "gen", title: "生成回答", icon: "🧠", color: "#db2777", detail: "模型只能用「权重里的记忆」作答：训练截止日期 + 公开语料" },
 ];
 
 const RAG_STAGES = [
-  { key: "ask", title: "提问", icon: "🧑‍💻", color: "#22d3ee", detail: "同一个问题，但这次有旁路知识库可用" },
-  { key: "embed", title: "Embedding 向量化", icon: "🧲", color: "#60a5fa", detail: "问题被编码成向量——语义相近的文本在高维空间里彼此靠近" },
-  { key: "search", title: "向量检索 top-k", icon: "🔍", color: "#60a5fa", detail: "在索引里按余弦相似度召回最相关的 2 个片段（混合检索还会叠 BM25）" },
-  { key: "inject", title: "注入上下文", icon: "📥", color: "#34d399", detail: "命中的片段连同问题一起放进窗口——模型「开卷考试」" },
-  { key: "gen", title: "生成回答", icon: "✅", color: "#34d399", detail: "有据可依地作答，并附上来源引用" },
+  { key: "ask", title: "提问", icon: "🧑‍💻", color: "#0891b2", detail: "同一个问题，但这次有旁路知识库可用" },
+  { key: "embed", title: "Embedding 向量化", icon: "🧲", color: "#2563eb", detail: "问题被编码成向量——语义相近的文本在高维空间里彼此靠近" },
+  { key: "search", title: "向量检索 top-k", icon: "🔍", color: "#2563eb", detail: "在索引里按余弦相似度召回最相关的 2 个片段（混合检索还会叠 BM25）" },
+  { key: "inject", title: "注入上下文", icon: "📥", color: "#059669", detail: "命中的片段连同问题一起放进窗口——模型「开卷考试」" },
+  { key: "gen", title: "生成回答", icon: "✅", color: "#059669", detail: "有据可依地作答，并附上来源引用" },
 ];
 
 const RAW_DELAYS = [1000, 1600];
@@ -127,11 +127,11 @@ export default function RagPipeline() {
 
   return (
     <section id="rag-demo" className="relative mx-auto max-w-6xl px-6 py-24">
-      <div className="rounded-3xl border border-aurora-blue/30 bg-night-900/60 p-8 backdrop-blur-md sm:p-12">
-        <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">
+      <div className="rounded-3xl border border-aurora-blue/30 bg-paper-100/60 p-8 backdrop-blur-md sm:p-12">
+        <h2 className="text-center text-3xl font-bold text-slate-900 sm:text-4xl">
           📚 RAG 检索流水线 <span className="text-lg font-normal text-slate-500">交互演示</span>
         </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-slate-400">
+        <p className="mx-auto mt-3 max-w-2xl text-center text-slate-500">
           模型权重里的知识是冻结的：不知你的内部制度、不知最新文档、不记一次性的会议结论。
           RAG 在回答前先去「旁路知识库」查资料——选一个问题，切换两种模式对比。
         </p>
@@ -145,7 +145,7 @@ export default function RagPipeline() {
               className={`rounded-full border px-4 py-2 text-sm transition-colors ${
                 scenario.id === s.id
                   ? "border-aurora-blue bg-aurora-blue/15 text-aurora-blue"
-                  : "border-night-600 text-slate-400 hover:border-aurora-blue/60 hover:text-white"
+                  : "border-paper-400 text-slate-500 hover:border-aurora-blue/60 hover:text-slate-900"
               }`}
             >
               {s.q}
@@ -159,8 +159,8 @@ export default function RagPipeline() {
             onClick={() => setMode("raw")}
             className={`rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
               !isRag
-                ? "bg-red-500/20 text-red-300 ring-1 ring-red-500/50"
-                : "bg-white/5 text-slate-400 ring-1 ring-white/10 hover:text-white"
+                ? "bg-red-500/20 text-red-500 ring-1 ring-red-500/50"
+                : "bg-slate-900/5 text-slate-500 ring-1 ring-slate-900/10 hover:text-slate-900"
             }`}
           >
             🚫 直接问模型（闭卷）
@@ -170,7 +170,7 @@ export default function RagPipeline() {
             className={`rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
               isRag
                 ? "bg-aurora-blue/20 text-aurora-blue ring-1 ring-aurora-blue/50"
-                : "bg-white/5 text-slate-400 ring-1 ring-white/10 hover:text-white"
+                : "bg-slate-900/5 text-slate-500 ring-1 ring-slate-900/10 hover:text-slate-900"
             }`}
           >
             📚 RAG 增强（开卷）
@@ -189,14 +189,14 @@ export default function RagPipeline() {
                     animate={active ? { scale: 1.02 } : { scale: 1 }}
                     className={`flex items-start gap-3 rounded-xl border p-3 transition-colors duration-300 ${
                       active
-                        ? "border-transparent bg-night-800"
-                        : "border-night-700/50 bg-night-900/40 opacity-60"
+                        ? "border-transparent bg-paper-200"
+                        : "border-paper-300/50 bg-paper-100/40 opacity-60"
                     }`}
                     style={active ? { borderColor: s.color, boxShadow: `0 0 24px -6px ${s.color}66` } : undefined}
                   >
                     <span className="text-lg">{s.icon}</span>
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: active || past ? s.color : "#94a3b8" }}>
+                      <p className="text-sm font-semibold" style={{ color: active || past ? s.color : "#475569" }}>
                         {s.title}
                         {past && <span className="ml-2 text-xs opacity-70">✓</span>}
                       </p>
@@ -204,7 +204,7 @@ export default function RagPipeline() {
                         <motion.p
                           initial={{ opacity: 0, y: 4 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="mt-1 text-xs leading-relaxed text-slate-400"
+                          className="mt-1 text-xs leading-relaxed text-slate-500"
                         >
                           {s.detail}
                         </motion.p>
@@ -212,7 +212,7 @@ export default function RagPipeline() {
                     </div>
                   </motion.div>
                   {i < stages.length - 1 && (
-                    <div className="ml-7 h-2 w-px bg-night-600" />
+                    <div className="ml-7 h-2 w-px bg-paper-400" />
                   )}
                 </div>
               );
@@ -224,7 +224,7 @@ export default function RagPipeline() {
             {/* 向量索引面板 */}
             <div
               className={`relative overflow-hidden rounded-xl border p-4 transition-opacity ${
-                isRag ? "border-aurora-blue/30 bg-night-950/60" : "border-night-700/60 bg-night-950/60 opacity-40"
+                isRag ? "border-aurora-blue/30 bg-white/60" : "border-paper-300/60 bg-white/60 opacity-40"
               }`}
             >
               <div className="mb-3 flex items-center justify-between">
@@ -249,18 +249,18 @@ export default function RagPipeline() {
                       className={`rounded-lg border p-2.5 transition-colors duration-500 ${
                         hit
                           ? "border-aurora-blue/70 bg-aurora-blue/10"
-                          : "border-night-700/50 bg-night-900/40"
+                          : "border-paper-300/50 bg-paper-100/40"
                       }`}
                     >
-                      <p className={`truncate font-mono text-[10px] ${hit ? "text-aurora-blue" : "text-slate-600"}`}>
+                      <p className={`truncate font-mono text-[10px] ${hit ? "text-aurora-blue" : "text-slate-400"}`}>
                         {c.doc}
                       </p>
-                      <p className={`mt-1 text-xs leading-relaxed ${hit ? "text-slate-200" : "text-slate-500"}`}>
+                      <p className={`mt-1 text-xs leading-relaxed ${hit ? "text-slate-700" : "text-slate-500"}`}>
                         {hit ? c.text : isRag ? (showScore ? "（相似度过低，未召回）" : "▓▓▓▓ ▓▓▓▓▓ ▓▓▓") : "· · ·"}
                       </p>
                       {showScore && (
                         <div className="mt-2 flex items-center gap-2">
-                          <div className="h-1 flex-1 overflow-hidden rounded-full bg-night-700">
+                          <div className="h-1 flex-1 overflow-hidden rounded-full bg-paper-300">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${c.score * 100}%` }}
@@ -268,7 +268,7 @@ export default function RagPipeline() {
                               className={`h-full rounded-full ${i < 2 ? "bg-aurora-blue" : "bg-slate-600"}`}
                             />
                           </div>
-                          <span className={`font-mono text-[10px] ${i < 2 ? "text-aurora-blue" : "text-slate-600"}`}>
+                          <span className={`font-mono text-[10px] ${i < 2 ? "text-aurora-blue" : "text-slate-400"}`}>
                             {c.score.toFixed(2)}
                           </span>
                         </div>
@@ -283,7 +283,7 @@ export default function RagPipeline() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="mt-3 truncate font-mono text-[10px] text-slate-600"
+                  className="mt-3 truncate font-mono text-[10px] text-slate-400"
                 >
                   q_vec = [0.023, -0.117, 0.441, 0.078, -0.302, …] ({scenario.q})
                 </motion.p>
@@ -296,8 +296,8 @@ export default function RagPipeline() {
             </div>
 
             {/* 回答终端 */}
-            <div className="overflow-hidden rounded-xl border border-night-700 bg-night-950 shadow-2xl">
-              <div className="flex items-center gap-2 border-b border-night-700/60 px-4 py-2.5">
+            <div className="overflow-hidden rounded-xl border border-paper-300 bg-white shadow-xl shadow-slate-900/5">
+              <div className="flex items-center gap-2 border-b border-paper-300/60 px-4 py-2.5">
                 <span className="h-3 w-3 rounded-full bg-red-500/70" />
                 <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
                 <span className="h-3 w-3 rounded-full bg-green-500/70" />
@@ -312,7 +312,7 @@ export default function RagPipeline() {
                       <span className="text-slate-500">
                         {isRag ? stages[stage].title : RAW_STAGES[stage].title}…
                       </span>
-                      <span className="ml-1 inline-block animate-pulse text-slate-400">▌</span>
+                      <span className="ml-1 inline-block animate-pulse text-slate-500">▌</span>
                     </motion.div>
                   ) : (
                     <motion.div
@@ -324,8 +324,8 @@ export default function RagPipeline() {
                     >
                       {isRag ? (
                         <>
-                          <span className="text-green-400">[有据可查]</span>
-                          <p className="mt-2 leading-relaxed text-slate-200">{scenario.ragAnswer}</p>
+                          <span className="text-green-600">[有据可查]</span>
+                          <p className="mt-2 leading-relaxed text-slate-700">{scenario.ragAnswer}</p>
                           <div className="mt-3 flex flex-wrap gap-2">
                             {scenario.sources.map((s) => (
                               <span key={s} className="rounded-full bg-aurora-blue/10 px-2.5 py-0.5 text-xs text-aurora-blue ring-1 ring-aurora-blue/30">
@@ -336,8 +336,8 @@ export default function RagPipeline() {
                         </>
                       ) : (
                         <>
-                          <span className="text-red-400">{scenario.rawTag}</span>
-                          <p className="mt-2 leading-relaxed text-slate-400">{scenario.rawAnswer}</p>
+                          <span className="text-red-600">{scenario.rawTag}</span>
+                          <p className="mt-2 leading-relaxed text-slate-500">{scenario.rawAnswer}</p>
                         </>
                       )}
                     </motion.div>
@@ -351,7 +351,7 @@ export default function RagPipeline() {
         <p className="mt-8 text-center text-sm text-slate-500">
           💡 {scenario.lesson}
         </p>
-        <p className="mt-2 text-center text-xs text-slate-600">
+        <p className="mt-2 text-center text-xs text-slate-400">
           生产级 RAG 还会做：切块（chunking）· 混合检索（向量 + BM25）· 重排（rerank）· 查询改写 · 增量索引
         </p>
       </div>

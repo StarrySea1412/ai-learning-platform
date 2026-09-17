@@ -28,7 +28,7 @@ export default function Page() {
       {/* Three.js 全息粒子背景（fixed，全局氛围） */}
       <div className="fixed inset-0 -z-10">
         {ready && <NeuralBackground />}
-        <div className="absolute inset-0 bg-gradient-to-b from-night-950/40 via-night-950/70 to-night-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-paper-50/60 via-paper-50/80 to-paper-50" />
       </div>
 
       <Nav sections={sections} />
@@ -55,7 +55,7 @@ export default function Page() {
       {/* 生图提示词卡组 */}
       <PromptDeck />
 
-      <footer className="border-t border-night-700/60 py-10 text-center text-sm text-slate-500">
+      <footer className="border-t border-paper-300/60 py-10 text-center text-sm text-slate-500">
         <p>
           AI 学院 · 开源学习项目 · 内容基于公开资料整理（Transformer → LLM →
           Agent → Hermes → Harness → MCP → RAG，附六大工程组件解剖）· MIT License

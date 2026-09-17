@@ -34,11 +34,11 @@ export default function Nav({ sections }: { sections: string[] }) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-night-950/80 backdrop-blur-md border-b border-night-700/60" : "bg-transparent"
+        scrolled ? "bg-paper-50/80 backdrop-blur-md border-b border-paper-300/60" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-2 font-bold tracking-wide text-white">
+        <a href="#top" className="flex items-center gap-2 font-bold tracking-wide text-slate-900">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-to-r from-aurora-cyan to-aurora-violet animate-pulse" />
           AI 学院
         </a>
@@ -49,8 +49,8 @@ export default function Nav({ sections }: { sections: string[] }) {
               href={`#${id}`}
               className={`rounded-full px-3.5 py-1.5 transition-colors ${
                 active === id
-                  ? "bg-white/10 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-slate-900/10 text-slate-900"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-900/5"
               }`}
             >
               {label[id] ?? id}

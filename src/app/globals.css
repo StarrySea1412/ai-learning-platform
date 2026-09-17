@@ -7,21 +7,21 @@ html {
 }
 
 body {
-  @apply bg-night-950 text-slate-200 antialiased;
+  @apply bg-paper-50 text-slate-700 antialiased;
 }
 
 ::selection {
-  @apply bg-aurora-violet/40 text-white;
+  @apply bg-aurora-violet/30 text-slate-900;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-night-900;
+  @apply bg-paper-200;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-night-600 rounded-full;
+  @apply bg-paper-400 rounded-full;
   &:hover {
     @apply bg-aurora-violet/60;
   }
@@ -85,4 +85,3 @@ section[id] {
   transform-origin: right center;
   transform-box: fill-box;
 }
-

@@ -5,19 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: {
-          950: "#05070f",
-          900: "#0a0e1a",
-          800: "#111726",
-          700: "#1a2338",
-          600: "#243050",
+        // 明亮「纸感」层级：页面底 → 卡片 → 高亮层 → 边框
+        paper: {
+          50: "#f7f9fd",   // 页面底
+          100: "#ffffff",  // 卡片
+          200: "#eef2f9",  // 次级面板
+          300: "#e2e8f2",  // 边框
+          400: "#cdd6e6",  // 深边框
         },
+        // AI 品牌色（600 级：白底上对比度达标）
         aurora: {
-          cyan: "#22d3ee",
-          blue: "#60a5fa",
-          violet: "#a78bfa",
-          pink: "#f472b6",
-          amber: "#fbbf24",
+          cyan: "#0891b2",
+          blue: "#2563eb",
+          violet: "#7c3aed",
+          pink: "#db2777",
+          amber: "#d97706",
         },
       },
       fontFamily: {
@@ -26,6 +28,10 @@ const config: Config = {
       },
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+      boxShadow: {
+        card: "0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.12)",
+        "card-hover": "0 2px 4px rgba(15, 23, 42, 0.05), 0 16px 40px -12px rgba(124, 58, 237, 0.18)",
       },
     },
   },

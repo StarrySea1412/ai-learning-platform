@@ -7,12 +7,12 @@ import { STACK_A, STACK_B, type StackItem } from "@/lib/stack";
 /* ---------- 顶部架构分层图（SVG） ---------- */
 function StackDiagram() {
   const layers = [
-    { name: "用户 / 任务", items: ["🧑‍💻 指令"], color: "#94a3b8" },
-    { name: "Harness 工程层", items: ["🔄 Loop", "📐 Context", "🧠 Memory"], color: "#34d399" },
-    { name: "模型层", items: ["🧠 LLM", "⚡ Reasoning"], color: "#a78bfa" },
-    { name: "接口层", items: ["🔧 Tools", "🔌 MCP"], color: "#fbbf24" },
-    { name: "知识旁路", items: ["📚 RAG", "🧲 向量索引"], color: "#60a5fa" },
-    { name: "外部世界", items: ["🖥️ 执行环境", "🌐 API / 数据"], color: "#f472b6" },
+    { name: "用户 / 任务", items: ["🧑‍💻 指令"], color: "#475569" },
+    { name: "Harness 工程层", items: ["🔄 Loop", "📐 Context", "🧠 Memory"], color: "#059669" },
+    { name: "模型层", items: ["🧠 LLM", "⚡ Reasoning"], color: "#7c3aed" },
+    { name: "接口层", items: ["🔧 Tools", "🔌 MCP"], color: "#d97706" },
+    { name: "知识旁路", items: ["📚 RAG", "🧲 向量索引"], color: "#2563eb" },
+    { name: "外部世界", items: ["🖥️ 执行环境", "🌐 API / 数据"], color: "#db2777" },
   ];
   return (
     <div className="mx-auto mt-10 max-w-3xl space-y-2">
@@ -42,7 +42,7 @@ function StackDiagram() {
               </span>
             ))}
           </div>
-          {i < layers.length - 1 && <span className="hidden text-slate-600 sm:block">↓</span>}
+          {i < layers.length - 1 && <span className="hidden text-slate-400 sm:block">↓</span>}
         </motion.div>
       ))}
       <p className="pt-3 text-center text-xs text-slate-500">
@@ -62,7 +62,7 @@ function StackCard({ item, index }: { item: StackItem; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
-      className="overflow-hidden rounded-2xl border bg-night-900/70 backdrop-blur-sm transition-colors"
+      className="overflow-hidden rounded-2xl border bg-paper-100/70 backdrop-blur-sm transition-colors"
       style={{ borderColor: `${item.color}44` }}
     >
       <button
@@ -77,7 +77,7 @@ function StackCard({ item, index }: { item: StackItem; index: number }) {
         </span>
         <span className="flex-1">
           <span className="flex flex-wrap items-baseline gap-2">
-            <span className="font-semibold text-white">{item.name}</span>
+            <span className="font-semibold text-slate-900">{item.name}</span>
             <span className="font-mono text-xs" style={{ color: item.color }}>{item.en}</span>
           </span>
           <span className="mt-0.5 block text-xs text-slate-500">{item.tagline}</span>
@@ -99,7 +99,7 @@ function StackCard({ item, index }: { item: StackItem; index: number }) {
             transition={{ duration: 0.3 }}
           >
             <div className="space-y-4 border-t px-5 pb-5 pt-4" style={{ borderColor: `${item.color}33` }}>
-              <p className="text-sm leading-relaxed text-slate-300">{item.what}</p>
+              <p className="text-sm leading-relaxed text-slate-700">{item.what}</p>
 
               <div>
                 <h4 className="mb-2 text-xs font-bold tracking-wider" style={{ color: item.color }}>
@@ -107,7 +107,7 @@ function StackCard({ item, index }: { item: StackItem; index: number }) {
                 </h4>
                 <ul className="space-y-1.5">
                   {item.how.map((h) => (
-                    <li key={h} className="flex gap-2 text-xs leading-relaxed text-slate-400">
+                    <li key={h} className="flex gap-2 text-xs leading-relaxed text-slate-500">
                       <span style={{ color: item.color }}>▸</span>
                       <span>{h}</span>
                     </li>
@@ -116,12 +116,12 @@ function StackCard({ item, index }: { item: StackItem; index: number }) {
               </div>
 
               <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3">
-                <h4 className="mb-1.5 text-xs font-bold tracking-wider text-red-400">
+                <h4 className="mb-1.5 text-xs font-bold tracking-wider text-red-600">
                   ⚠ 常见翻车点
                 </h4>
                 <ul className="space-y-1">
                   {item.pitfalls.map((p) => (
-                    <li key={p} className="text-xs leading-relaxed text-slate-400">
+                    <li key={p} className="text-xs leading-relaxed text-slate-500">
                       · {p}
                     </li>
                   ))}
@@ -142,8 +142,8 @@ export default function AgentStack() {
         <span className="mb-3 inline-block rounded-full border border-aurora-cyan/30 bg-aurora-cyan/10 px-4 py-1 text-xs text-aurora-cyan">
           深水区 · Agent 工程组件层
         </span>
-        <h2 className="text-3xl font-bold text-white sm:text-4xl">把 LLM 变成系统：六大组件</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-slate-400">
+        <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">把 LLM 变成系统：六大组件</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-slate-500">
           Loop · Function Call · MCP · Memory · Context Control · RAG/向量索引——
           这是 Harness 内部的解剖图，也是 2025 年 Agent 工程师的技能树。点击每张卡片展开原理、工程要点与翻车点。
         </p>

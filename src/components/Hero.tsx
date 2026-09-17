@@ -20,7 +20,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-4xl font-black leading-tight text-white sm:text-6xl"
+          className="text-4xl font-black leading-tight text-slate-900 sm:text-6xl"
         >
           看懂 AI 的
           <span className="bg-gradient-to-r from-aurora-cyan via-aurora-violet to-aurora-pink bg-clip-text text-transparent">
@@ -32,7 +32,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg"
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-500 sm:text-lg"
         >
           Transformer · LLM · Agent · Hermes · Harness · MCP · RAG
           <br />+ 六大工程组件：Agent Loop · Function Call · Tools · Memory · Context Control · 向量索引
@@ -49,13 +49,13 @@ export default function Hero() {
         >
           <a
             href="#timeline"
-            className="rounded-full bg-gradient-to-r from-aurora-cyan to-aurora-blue px-7 py-3 text-sm font-semibold text-night-950 transition-transform hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-aurora-cyan to-aurora-blue px-7 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
           >
             开始学习 →
           </a>
           <a
             href="#prompts"
-            className="rounded-full border border-night-600 px-7 py-3 text-sm font-semibold text-slate-300 transition-colors hover:border-aurora-violet hover:text-white"
+            className="rounded-full border border-paper-400 px-7 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-aurora-violet hover:text-slate-900"
           >
             直达图解工坊
           </a>

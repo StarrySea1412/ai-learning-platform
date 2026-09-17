@@ -29,9 +29,9 @@ function TransformerSVG() {
     <svg viewBox="0 0 320 220" className="w-full max-w-sm" role="img" aria-label="自注意力机制示意">
       <defs>
         <linearGradient id="att-g" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.1" />
-          <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.1" />
+          <stop offset="0%" stopColor="#0891b2" stopOpacity="0.1" />
+          <stop offset="50%" stopColor="#0891b2" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#0891b2" stopOpacity="0.1" />
         </linearGradient>
       </defs>
 
@@ -44,7 +44,7 @@ function TransformerSVG() {
             key={i}
             d={`M ${positions[2]} 150 Q ${(positions[2] + x) / 2} ${150 - 60 - strength * 45} ${x} 150`}
             fill="none"
-            stroke="#22d3ee"
+            stroke="#0891b2"
             strokeWidth={1 + strength * 3}
             strokeOpacity={0.15 + strength * 0.75}
             className="svg-dash"
@@ -56,8 +56,8 @@ function TransformerSVG() {
       {/* token 节点 */}
       {tokens.map((t, i) => (
         <g key={t} className={i === 2 ? "svg-breathe" : "svg-float"} style={{ animationDelay: `${i * 0.4}s` }}>
-          <circle cx={positions[i]} cy={150} r={26} fill="#0a0e1a" stroke="#22d3ee" strokeOpacity={i === 2 ? 1 : 0.45} strokeWidth={i === 2 ? 2 : 1} />
-          <text x={positions[i]} y={155} textAnchor="middle" fill={i === 2 ? "#22d3ee" : "#94a3b8"} fontSize="12" fontFamily="monospace">
+          <circle cx={positions[i]} cy={150} r={26} fill="#ffffff" stroke="#0891b2" strokeOpacity={i === 2 ? 1 : 0.45} strokeWidth={i === 2 ? 2 : 1} />
+          <text x={positions[i]} y={155} textAnchor="middle" fill={i === 2 ? "#0891b2" : "#94a3b8"} fontSize="12" fontFamily="monospace">
             {t}
           </text>
         </g>
@@ -81,25 +81,25 @@ function LlmSVG() {
     <svg viewBox="0 0 320 220" className="w-full max-w-sm" role="img" aria-label="模型规模增长示意">
       {balls.map((b, i) => (
         <g key={b.label} className="svg-float" style={{ animationDelay: b.delay }}>
-          <circle cx={b.x} cy={140 - b.r} r={b.r} fill="#0a0e1a" stroke="#60a5fa" strokeWidth={1.5} strokeOpacity={0.4 + i * 0.3} />
+          <circle cx={b.x} cy={140 - b.r} r={b.r} fill="#ffffff" stroke="#2563eb" strokeWidth={1.5} strokeOpacity={0.4 + i * 0.3} />
           <circle cx={b.x} cy={140 - b.r} r={b.r} fill="url(#llm-g)" opacity={0.25} />
-          <text x={b.x} y={140 - b.r + 4} textAnchor="middle" fill="#93c5fd" fontSize="11" fontFamily="monospace">
+          <text x={b.x} y={140 - b.r + 4} textAnchor="middle" fill="#2563eb" fontSize="11" fontFamily="monospace">
             {b.label}
           </text>
         </g>
       ))}
       <defs>
         <radialGradient id="llm-g">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
+          <stop offset="0%" stopColor="#2563eb" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
         </radialGradient>
       </defs>
       {/* 地面 */}
-      <line x1="20" y1="141" x2="300" y2="141" stroke="#334155" strokeWidth="1" />
+      <line x1="20" y1="141" x2="300" y2="141" stroke="#cbd5e1" strokeWidth="1" />
       <text x="160" y="180" textAnchor="middle" fill="#64748b" fontSize="11">
         1 亿 → 1750 亿 → 万亿级参数 · 能力「涌现」
       </text>
-      <text x="160" y="200" textAnchor="middle" fill="#475569" fontSize="10">
+      <text x="160" y="200" textAnchor="middle" fill="#94a3b8" fontSize="10">
         圆的面积 ≈ 参数量级（示意）
       </text>
     </svg>
@@ -116,12 +116,12 @@ function AgentSVG() {
 
   return (
     <svg viewBox="0 0 320 220" className="w-full max-w-sm" role="img" aria-label="Agent 循环示意">
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#a78bfa" strokeOpacity="0.35" strokeWidth="2" className="svg-dash" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#7c3aed" strokeOpacity="0.35" strokeWidth="2" className="svg-dash" />
 
       {/* 中心 LLM */}
       <g className="svg-breathe">
-        <rect x={cx - 34} y={cy - 22} width="68" height="44" rx="10" fill="#0a0e1a" stroke="#a78bfa" strokeWidth="1.5" />
-        <text x={cx} y={cy + 4} textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">
+        <rect x={cx - 34} y={cy - 22} width="68" height="44" rx="10" fill="#ffffff" stroke="#7c3aed" strokeWidth="1.5" />
+        <text x={cx} y={cy + 4} textAnchor="middle" fill="#7c3aed" fontSize="13" fontWeight="bold">
           LLM
         </text>
       </g>
@@ -133,8 +133,8 @@ function AgentSVG() {
         const y = cy + r * Math.sin(a);
         return (
           <g key={s} className="svg-float" style={{ animationDelay: `${i * 0.5}s` }}>
-            <circle cx={x} cy={y} r={20} fill="#0a0e1a" stroke="#a78bfa" strokeOpacity="0.7" strokeWidth="1.2" />
-            <text x={x} y={y + 4} textAnchor="middle" fill="#ddd6fe" fontSize="11">
+            <circle cx={x} cy={y} r={20} fill="#ffffff" stroke="#7c3aed" strokeOpacity="0.7" strokeWidth="1.2" />
+            <text x={x} y={y + 4} textAnchor="middle" fill="#7c3aed" fontSize="11">
               {s}
             </text>
           </g>
@@ -154,44 +154,44 @@ function HermesSVG() {
     <svg viewBox="0 0 320 220" className="w-full max-w-sm" role="img" aria-label="Hermes 混合推理示意">
       {/* 主体 */}
       <g className="svg-float">
-        <circle cx="160" cy="105" r="52" fill="#0a0e1a" stroke="#f472b6" strokeWidth="1.5" />
-        <text x="160" y="98" textAnchor="middle" fill="#f9a8d4" fontSize="15" fontWeight="bold">
+        <circle cx="160" cy="105" r="52" fill="#ffffff" stroke="#db2777" strokeWidth="1.5" />
+        <text x="160" y="98" textAnchor="middle" fill="#db2777" fontSize="15" fontWeight="bold">
           Hermes
         </text>
-        <text x="160" y="118" textAnchor="middle" fill="#f472b6" fontSize="10">
+        <text x="160" y="118" textAnchor="middle" fill="#db2777" fontSize="10">
           混合推理
         </text>
       </g>
 
       {/* 左：快速模式（闪电） */}
       <g className="svg-glow">
-        <path d="M 70 70 L 58 92 L 68 92 L 60 112 L 82 86 L 71 86 L 80 70 Z" fill="#22d3ee" opacity="0.9" />
-        <text x="70" y="140" textAnchor="middle" fill="#67e8f9" fontSize="11">
+        <path d="M 70 70 L 58 92 L 68 92 L 60 112 L 82 86 L 71 86 L 80 70 Z" fill="#0891b2" opacity="0.9" />
+        <text x="70" y="140" textAnchor="middle" fill="#06b6d4" fontSize="11">
           快思
         </text>
       </g>
 
       {/* 右：推理模式（思维链） */}
       <g className="svg-glow" style={{ animationDelay: "1.2s" }}>
-        <circle cx="252" cy="78" r="4" fill="#a78bfa" />
-        <circle cx="270" cy="92" r="4" fill="#a78bfa" opacity="0.8" />
-        <circle cx="258" cy="108" r="4" fill="#a78bfa" opacity="0.6" />
-        <path d="M 252 78 Q 264 84 270 92 Q 262 102 258 108" fill="none" stroke="#a78bfa" strokeWidth="1.5" className="svg-dash" />
-        <text x="260" y="140" textAnchor="middle" fill="#c4b5fd" fontSize="11">
+        <circle cx="252" cy="78" r="4" fill="#7c3aed" />
+        <circle cx="270" cy="92" r="4" fill="#7c3aed" opacity="0.8" />
+        <circle cx="258" cy="108" r="4" fill="#7c3aed" opacity="0.6" />
+        <path d="M 252 78 Q 264 84 270 92 Q 262 102 258 108" fill="none" stroke="#7c3aed" strokeWidth="1.5" className="svg-dash" />
+        <text x="260" y="140" textAnchor="middle" fill="#7c3aed" fontSize="11">
           慢想（思维链）
         </text>
       </g>
 
       {/* 连接 */}
-      <line x1="92" y1="92" x2="118" y2="98" stroke="#f472b6" strokeOpacity="0.4" className="svg-dash" />
-      <line x1="202" y1="98" x2="228" y2="92" stroke="#f472b6" strokeOpacity="0.4" className="svg-dash" />
+      <line x1="92" y1="92" x2="118" y2="98" stroke="#db2777" strokeOpacity="0.4" className="svg-dash" />
+      <line x1="202" y1="98" x2="228" y2="92" stroke="#db2777" strokeOpacity="0.4" className="svg-dash" />
 
       {/* 翅膀 */}
       <g className="svg-wing" style={{ transformOrigin: "212px 60px" }}>
-        <path d="M 212 60 Q 240 42 258 52 Q 238 58 226 66 Z" fill="#f472b6" opacity="0.55" />
+        <path d="M 212 60 Q 240 42 258 52 Q 238 58 226 66 Z" fill="#db2777" opacity="0.55" />
       </g>
       <g className="svg-wing" style={{ transformOrigin: "108px 60px", animationDelay: "0.45s" }}>
-        <path d="M 108 60 Q 80 42 62 52 Q 82 58 94 66 Z" fill="#f472b6" opacity="0.55" />
+        <path d="M 108 60 Q 80 42 62 52 Q 82 58 94 66 Z" fill="#db2777" opacity="0.55" />
       </g>
 
       <text x="160" y="200" textAnchor="middle" fill="#64748b" fontSize="11">
@@ -207,26 +207,26 @@ function HarnessSVG() {
     <svg viewBox="0 0 320 220" className="w-full max-w-sm" role="img" aria-label="Harness 马具隐喻示意">
       {/* 模型之马 */}
       <g className="svg-float">
-        <circle cx="90" cy="100" r="40" fill="#0a0e1a" stroke="#fbbf24" strokeWidth="1.5" />
-        <text x="90" y="96" textAnchor="middle" fill="#fde68a" fontSize="12" fontWeight="bold">
+        <circle cx="90" cy="100" r="40" fill="#ffffff" stroke="#d97706" strokeWidth="1.5" />
+        <text x="90" y="96" textAnchor="middle" fill="#d97706" fontSize="12" fontWeight="bold">
           LLM
         </text>
-        <text x="90" y="114" textAnchor="middle" fill="#fbbf24" fontSize="9">
+        <text x="90" y="114" textAnchor="middle" fill="#d97706" fontSize="9">
           千里马
         </text>
       </g>
 
       {/* 缰绳 */}
-      <path d="M 130 100 C 170 70, 200 70, 235 100" fill="none" stroke="#fbbf24" strokeWidth="2" className="svg-dash" />
-      <path d="M 130 100 C 170 130, 200 130, 235 100" fill="none" stroke="#fbbf24" strokeWidth="2" className="svg-dash" opacity="0.6" />
+      <path d="M 130 100 C 170 70, 200 70, 235 100" fill="none" stroke="#d97706" strokeWidth="2" className="svg-dash" />
+      <path d="M 130 100 C 170 130, 200 130, 235 100" fill="none" stroke="#d97706" strokeWidth="2" className="svg-dash" opacity="0.6" />
 
       {/* 操控台 */}
       <g>
-        <rect x="235" y="72" width="70" height="56" rx="8" fill="#0a0e1a" stroke="#fbbf24" strokeWidth="1.5" />
+        <rect x="235" y="72" width="70" height="56" rx="8" fill="#ffffff" stroke="#d97706" strokeWidth="1.5" />
         {/* 屏幕内容：模拟开关与代码行 */}
-        <rect x="243" y="82" width="28" height="6" rx="2" fill="#fbbf24" opacity="0.8" />
-        <rect x="243" y="94" width="44" height="4" rx="2" fill="#fbbf24" opacity="0.4" />
-        <rect x="243" y="104" width="36" height="4" rx="2" fill="#fbbf24" opacity="0.4" />
+        <rect x="243" y="82" width="28" height="6" rx="2" fill="#d97706" opacity="0.8" />
+        <rect x="243" y="94" width="44" height="4" rx="2" fill="#d97706" opacity="0.4" />
+        <rect x="243" y="104" width="36" height="4" rx="2" fill="#d97706" opacity="0.4" />
         <circle cx="288" cy="85" r="5" fill="#22c55e" className="svg-glow" />
         <text x="270" y="146" textAnchor="middle" fill="#fcd34d" fontSize="10">
           Harness
@@ -254,11 +254,11 @@ function McpSVG() {
         const y = 45 + i * 60;
         return (
           <g key={a}>
-            <rect x="18" y={y - 15} width="66" height="30" rx="7" fill="#0a0e1a" stroke="#22d3ee" strokeOpacity="0.55" strokeWidth="1.2" />
-            <text x="51" y={y + 4} textAnchor="middle" fill="#67e8f9" fontSize="11">
+            <rect x="18" y={y - 15} width="66" height="30" rx="7" fill="#ffffff" stroke="#0891b2" strokeOpacity="0.55" strokeWidth="1.2" />
+            <text x="51" y={y + 4} textAnchor="middle" fill="#06b6d4" fontSize="11">
               {a}
             </text>
-            <path d={`M 84 ${y} Q 122 ${y} ${cx - 38} ${cy}`} fill="none" stroke="#22d3ee" strokeOpacity="0.45" strokeWidth="1.3" className="svg-dash" style={{ animationDelay: `${i * 0.3}s` }} />
+            <path d={`M 84 ${y} Q 122 ${y} ${cx - 38} ${cy}`} fill="none" stroke="#0891b2" strokeOpacity="0.45" strokeWidth="1.3" className="svg-dash" style={{ animationDelay: `${i * 0.3}s` }} />
           </g>
         );
       })}
@@ -267,14 +267,14 @@ function McpSVG() {
       <g className="svg-breathe">
         <polygon
           points={`${cx + 36},${cy} ${cx + 18},${cy + 31} ${cx - 18},${cy + 31} ${cx - 36},${cy} ${cx - 18},${cy - 31} ${cx + 18},${cy - 31}`}
-          fill="#0a0e1a"
-          stroke="#22d3ee"
+          fill="#ffffff"
+          stroke="#0891b2"
           strokeWidth="1.8"
         />
-        <text x={cx} y={cy - 2} textAnchor="middle" fill="#a5f3fc" fontSize="13" fontWeight="bold">
+        <text x={cx} y={cy - 2} textAnchor="middle" fill="#0891b2" fontSize="13" fontWeight="bold">
           MCP
         </text>
-        <text x={cx} y={cy + 14} textAnchor="middle" fill="#22d3ee" fontSize="9">
+        <text x={cx} y={cy + 14} textAnchor="middle" fill="#0891b2" fontSize="9">
           枢纽
         </text>
       </g>
@@ -284,9 +284,9 @@ function McpSVG() {
         const y = 45 + i * 60;
         return (
           <g key={t}>
-            <path d={`M ${cx + 36} ${cy} Q 200 ${y} 236 ${y}`} fill="none" stroke="#34d399" strokeOpacity="0.45" strokeWidth="1.3" className="svg-dash" style={{ animationDelay: `${0.15 + i * 0.3}s` }} />
-            <rect x="236" y={y - 15} width="66" height="30" rx="7" fill="#0a0e1a" stroke="#34d399" strokeOpacity="0.55" strokeWidth="1.2" />
-            <text x="269" y={y + 4} textAnchor="middle" fill="#6ee7b7" fontSize="11">
+            <path d={`M ${cx + 36} ${cy} Q 200 ${y} 236 ${y}`} fill="none" stroke="#059669" strokeOpacity="0.45" strokeWidth="1.3" className="svg-dash" style={{ animationDelay: `${0.15 + i * 0.3}s` }} />
+            <rect x="236" y={y - 15} width="66" height="30" rx="7" fill="#ffffff" stroke="#059669" strokeOpacity="0.55" strokeWidth="1.2" />
+            <text x="269" y={y + 4} textAnchor="middle" fill="#059669" fontSize="11">
               {t}
             </text>
           </g>
@@ -303,10 +303,10 @@ function McpSVG() {
 /* ---------- 07 RAG：检索流水线图 ---------- */
 function RagSVG() {
   const stages = [
-    { x: 24, w: 62, label: "文档库", color: "#60a5fa" },
-    { x: 106, w: 62, label: "切块", color: "#a78bfa" },
-    { x: 188, w: 66, label: "向量库", color: "#60a5fa" },
-    { x: 264, w: 50, label: "LLM", color: "#34d399" },
+    { x: 24, w: 62, label: "文档库", color: "#2563eb" },
+    { x: 106, w: 62, label: "切块", color: "#7c3aed" },
+    { x: 188, w: 66, label: "向量库", color: "#2563eb" },
+    { x: 264, w: 50, label: "LLM", color: "#059669" },
   ];
 
   return (
@@ -314,7 +314,7 @@ function RagSVG() {
       {/* 流水线主体 */}
       {stages.map((s, i) => (
         <g key={s.label} className="svg-float" style={{ animationDelay: `${i * 0.4}s` }}>
-          <rect x={s.x} y="52" width={s.w} height="42" rx="9" fill="#0a0e1a" stroke={s.color} strokeOpacity="0.7" strokeWidth="1.3" />
+          <rect x={s.x} y="52" width={s.w} height="42" rx="9" fill="#ffffff" stroke={s.color} strokeOpacity="0.7" strokeWidth="1.3" />
           <text x={s.x + s.w / 2} y="78" textAnchor="middle" fill={s.color} fontSize="12">
             {s.label}
           </text>
@@ -323,21 +323,21 @@ function RagSVG() {
 
       {/* 文档库里的页 */}
       {[0, 1, 2].map((i) => (
-        <rect key={i} x={36 + i * 12} y={40 - i * 3} width="14" height="18" rx="2" fill="#60a5fa" opacity={0.25 + i * 0.15} />
+        <rect key={i} x={36 + i * 12} y={40 - i * 3} width="14" height="18" rx="2" fill="#2563eb" opacity={0.25 + i * 0.15} />
       ))}
       {/* 切块里的小块 */}
       {[0, 1, 2, 3].map((i) => (
-        <rect key={i} x={114 + (i % 2) * 18} y={94 - Math.floor(i / 2) * 0} width="12" height="12" rx="2" fill="#a78bfa" opacity={0.3 + i * 0.12} />
+        <rect key={i} x={114 + (i % 2) * 18} y={94 - Math.floor(i / 2) * 0} width="12" height="12" rx="2" fill="#7c3aed" opacity={0.3 + i * 0.12} />
       ))}
       {/* 向量库里的向量点 */}
       {[0, 1, 2, 3, 4].map((i) => (
-        <circle key={i} cx={202 + (i % 3) * 16} cy={i < 3 ? 104 : 94} r="2.5" fill="#60a5fa" opacity={0.4 + i * 0.1} />
+        <circle key={i} cx={202 + (i % 3) * 16} cy={i < 3 ? 104 : 94} r="2.5" fill="#2563eb" opacity={0.4 + i * 0.1} />
       ))}
 
       {/* 箭头 */}
       {[
-        { x1: 86, x2: 104, c: "#60a5fa" },
-        { x1: 168, x2: 186, c: "#a78bfa" },
+        { x1: 86, x2: 104, c: "#2563eb" },
+        { x1: 168, x2: 186, c: "#7c3aed" },
       ].map((a, i) => (
         <g key={i}>
           <line x1={a.x1} y1="73" x2={a.x2} y2="73" stroke={a.c} strokeWidth="1.5" className="svg-dash" />
@@ -347,32 +347,32 @@ function RagSVG() {
 
       {/* top-k 召回：向量库 → LLM（高亮） */}
       <g>
-        <path d="M 254 66 Q 260 40 278 46 L 286 52" fill="none" stroke="#34d399" strokeWidth="1.6" className="svg-dash" />
-        <text x="252" y="34" textAnchor="middle" fill="#34d399" fontSize="10">
+        <path d="M 254 66 Q 260 40 278 46 L 286 52" fill="none" stroke="#059669" strokeWidth="1.6" className="svg-dash" />
+        <text x="252" y="34" textAnchor="middle" fill="#059669" fontSize="10">
           top-k 召回
         </text>
       </g>
       {/* 旁路：切块 → LLM 的注入线 */}
       <g>
-        <path d="M 137 94 Q 137 130 240 96" fill="none" stroke="#34d399" strokeOpacity="0.35" strokeWidth="1.2" className="svg-dash" />
+        <path d="M 137 94 Q 137 130 240 96" fill="none" stroke="#059669" strokeOpacity="0.35" strokeWidth="1.2" className="svg-dash" />
       </g>
 
       {/* 底部：提问进入向量库 */}
       <g>
-        <circle cx="221" cy="150" r="15" fill="#0a0e1a" stroke="#f472b6" strokeOpacity="0.7" strokeWidth="1.2" />
-        <text x="221" y="155" textAnchor="middle" fill="#f9a8d4" fontSize="12">
+        <circle cx="221" cy="150" r="15" fill="#ffffff" stroke="#db2777" strokeOpacity="0.7" strokeWidth="1.2" />
+        <text x="221" y="155" textAnchor="middle" fill="#db2777" fontSize="12">
           ?
         </text>
-        <text x="248" y="155" fill="#f472b6" fontSize="10">
+        <text x="248" y="155" fill="#db2777" fontSize="10">
           提问向量化
         </text>
-        <line x1="221" y1="135" x2="221" y2="98" stroke="#f472b6" strokeOpacity="0.5" strokeWidth="1.3" className="svg-dash" />
+        <line x1="221" y1="135" x2="221" y2="98" stroke="#db2777" strokeOpacity="0.5" strokeWidth="1.3" className="svg-dash" />
       </g>
 
       <text x="160" y="200" textAnchor="middle" fill="#64748b" fontSize="11">
         开卷考试：先检索、再生成、附引用
       </text>
-      <text x="160" y="216" textAnchor="middle" fill="#475569" fontSize="10">
+      <text x="160" y="216" textAnchor="middle" fill="#94a3b8" fontSize="10">
         质量上限由「切块与召回」决定，而非生成端
       </text>
     </svg>
