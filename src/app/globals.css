@@ -34,54 +34,126 @@ section[id] {
 
 /* ===== SVG 动画 keyframes ===== */
 @keyframes dash-flow {
-  to {
-    stroke-dashoffset: -40;
-  }
+  to { stroke-dashoffset: -40; }
+}
+@keyframes dash-flow-reverse {
+  from { stroke-dashoffset: -40; }
+  to { stroke-dashoffset: 0; }
 }
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes float-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
 }
 @keyframes spin-slow {
   to { transform: rotate(360deg); }
 }
+@keyframes spin-slow-reverse {
+  to { transform: rotate(-360deg); }
+}
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.3; filter: blur(0px); }
+  50% { opacity: 0.9; filter: blur(1px); }
+}
+@keyframes glow-ring {
+  0%, 100% { opacity: 0.2; transform: scale(0.95); }
+  50% { opacity: 0.6; transform: scale(1.05); }
 }
 @keyframes scale-in-out {
-  0%, 100% { transform: scale(0.9); opacity: 0.6; }
-  50% { transform: scale(1.05); opacity: 1; }
+  0%, 100% { transform: scale(0.92); opacity: 0.65; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+@keyframes pop-in {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 @keyframes wing-flap {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-18deg); }
+  50% { transform: rotate(-20deg); }
+}
+@keyframes orbit-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes scatter {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.5); opacity: 0; }
+}
+@keyframes particle-fade {
+  0%, 100% { opacity: 0.1; r: 2; }
+  50% { opacity: 0.8; r: 4; }
+}
+@keyframes data-flow {
+  0% { stroke-dashoffset: 80; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes node-arrival {
+  0% { opacity: 0; transform: scale(0.3) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes beam-in {
+  0% { stroke-dashoffset: 120; opacity: 0; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
 }
 
 .svg-dash {
   stroke-dasharray: 6 6;
-  animation: dash-flow 1.6s linear infinite;
+  animation: dash-flow 1.4s linear infinite;
 }
 .svg-float {
-  animation: float-y 3s ease-in-out infinite;
+  animation: float-y 3.2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-float-x {
+  animation: float-x 4s ease-in-out infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
 .svg-spin-slow {
-  animation: spin-slow 14s linear infinite;
+  animation: spin-slow 18s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-spin-slow-reverse {
+  animation: spin-slow-reverse 22s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
 .svg-glow {
   animation: glow-pulse 2.4s ease-in-out infinite;
 }
+.svg-glow-ring {
+  animation: glow-ring 3s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
 .svg-breathe {
   animation: scale-in-out 2.8s ease-in-out infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
+.svg-pop-in {
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
 .svg-wing {
-  animation: wing-flap 0.9s ease-in-out infinite;
+  animation: wing-flap 1.1s ease-in-out infinite;
   transform-origin: right center;
   transform-box: fill-box;
+}
+.svg-orbit {
+  animation: orbit-ring 8s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-data-flow {
+  stroke-dasharray: 10 6;
+  animation: dash-flow 2s linear infinite;
 }

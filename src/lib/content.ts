@@ -23,17 +23,17 @@ export const AGENT: Concept = {
     },
     {
       title: "工具调用（Tool Use）",
-      body: "模型输出结构化的「工具调用请求」，执行环境跑完把结果塞回上下文。Function Calling / MCP 让工具接入标准化。",
+      body: "模型输出结构化的 tool_call JSON（工具名 + 参数），执行环境跑完后把结果（成功数据或报错）塞回上下文。Function Calling / MCP 让工具接入标准化——但注意：没有上下文的工具结果 = 模型在盲飞，必须回填才能形成观测闭环。",
     },
     {
       title: "ReAct 与规划",
-      body: "推理（Reasoning）与行动（Acting）交替进行：先想一步、做一步、看结果、再想。配合任务分解，能处理多步骤复杂任务。",
+      body: "推理（Reasoning）与行动（Acting）交替进行：先想一步、做一步、看结果、再想。ReAct 让模型『说出来再行动』，输出里显式包含思考过程——这不仅是可解释性的来源，也是错误检测的锚点（你能在中间步骤打断并修正）。Plan-and-Execute 则先出全局计划再逐条执行，牺牲灵活性换稳定，适合可预测的流水线任务；不可预测的长任务适合纯 ReAct。",
     },
   ],
   deep: [
     {
       title: "错误复利：Agent 为什么在半途崩溃",
-      body: "每步 95% 正确率，20 步串联后只剩 0.95²⁰ ≈ 36%。Agent 的失败不是单点错误，而是误差沿轨迹累积放大。对策：每步可验证（测试/断言）、失败即回滚、把长任务切成带验收的短里程碑。",
+      body: "每步 95% 正确率，20 步串联后只剩 0.95²⁰ ≈ 36%。Agent 的失败不是单点错误，而是误差沿轨迹累积放大。对策：每步可验证（测试/断言）、失败即回滚、把长任务切成带验收的短里程碑。真实案例：Devin（Cognition AI）2024 年在 SWE-bench 上的实测——完全自主解决 13.86% 的真实 GitHub issue；Claude Code 在同样评测集约 20%；人类程序员基线约 55%。差距来自哪里？不是模型不够强，是『代码执行-测试-验证』的闭环没有建好——Agent 能写代码但不知道跑没跑通，往往到最后一刻才发现 Bug，然后从头重跑，整个轨迹浪费。解决方案：每个里程碑强制加验证步骤（跑测试、lint 静态检查），不要等 Agent 主动验证。",
     },
     {
       title: "上下文窗口 = 工作记忆上限",
@@ -45,15 +45,19 @@ export const AGENT: Concept = {
     },
     {
       title: "编排模式：单循环、多角色、图执行",
-      body: "单 agent 循环（够用且可调试）→ 多 agent 分工（orchestrator-worker、辩论、 critic）→ 有向图/状态机编排（LangGraph）。反直觉事实：多 agent 常带来协调开销与错误传播，Anthropic、Cognition 都写过「先别上多 agent」。",
+      body: "单 agent 循环（够用且可调试）→ 多 agent 分工（orchestrator-worker、辩论、 critic）→ 有向图/状态机编排（LangGraph）。反直觉事实：多 agent 常带来协调开销与错误传播，Anthropic、Cognition 都写过「先别上多 agent」。真实的翻车模式：orchestrator 给 worker 的任务描述不精确 → worker 做了对的事但不是对的任务 → 最终答案错但过程看起来对。避免方式：任务描述要像 API 契约一样精确（输入/输出格式、边界条件），不要用自然语言模糊委托。",
     },
     {
       title: "评测：从静态题库到可验证环境",
-      body: "SWE-bench（真实 GitHub issue）、WebArena/GAIA（网页与工具）、Terminal-Bench（命令行）。核心难点是 Agent 输出多样、路径不唯一——必须判「目标达成」而非「字符串匹配」，且环境要可复现、可回滚。",
+      body: "SWE-bench（真实 GitHub issue，人类解决率约 55%、当前 SOTA 约 20~35%）——评测的是真实解决能力，不是跑通率；WebArena/GAIA（网页与工具交互）；Terminal-Bench（命令行）；BFCL（函数调用正确性）。核心难点：Agent 输出多样、路径不唯一——必须判『目标达成』而非『字符串匹配』，且环境要可复现、可回滚（Docker 快照是标准做法）。特别提醒：Agent 评测分数的方差极大，同样题做 5 次可能 3 次对 2 次错——单次评测没有意义，至少 3 次独立运行取平均。",
     },
     {
       title: "安全：提示注入即 RCE",
       body: "当 Agent 能读网页/邮件、又能执行命令，被污染的数据就能变成指令（lethal trifecta：私有数据 + 不可信内容 + 对外通道）。防御靠权限最小化、人审高危动作、工具层强制约束、把外部内容当数据而非指令。",
+    },
+    {
+      title: "Agent 的「自信的错」比崩溃更危险",
+      body: "程序报错会崩溃，Agent 做错事会继续跑、继续编、更自信。心理学概念『错位自信（calibration error）』——模型越强、越擅长生成『听起来对但错了』的回答。监控方案：① 每个工具调用后强制检查执行结果是否与意图一致；② 高风险操作（删/发/改）设置置信度阈值，不够高就走人工审批；③ 最终答案要强制 self-critique（让 Agent 审查自己输出的逻辑一致性）。",
     },
   ],
   formulas: [
@@ -65,11 +69,11 @@ export const AGENT: Concept = {
   ],
   debate: {
     pro: "「Agentic 是必然方向」——纯聊天已见顶，真正价值在替人完成多步工作；工具 + 循环是通向自动化的最短路径",
-    con: "「多数『Agent』只是昂贵的 if-else」——能用固定 workflow 就别用自主 agent；可预测性、成本、安全都反对过度自主。行业在『自主性 vs 可控性』之间反复拉扯",
+    con: "「多数『Agent』只是昂贵的 if-else」——能用固定 workflow 就别用自主 agent；可预测性、成本、安全都反对过度自主。更具体的反驳：Claude Code 的 agent loop 是 500 行代码的手写状态机，核心逻辑就是 while + tool call——不是不够聪明才这样做，是因为显式循环比隐式『自主决策』更可控、可复现、可调试。行业在『自主性 vs 可控性』之间的拉扯，最终收敛点是分层自主：简单步 Agent 自主，复杂步 human-in-the-loop。",
   },
   analogy:
     "LLM 是一位顾问，Agent 是给他配了电脑、电话和执行权——不只是给建议，而是直接把活干完。",
-  keyFacts: ["2025 = Agent 元年", "核心 = 循环 + 工具", "错误沿轨迹复利累积", "Manus / Claude Code / Devin"],
+  keyFacts: ["2025 = Agent 元年", "SWE-bench 人类基线 55%，SOTA 仅 20~35%", "每个里程碑强制验证，否则错误复利", "Claude Code 核心 = 500 行手写状态机"],
   svg: "agent",
 };
 
@@ -169,7 +173,7 @@ export const HARNESS: Concept = {
     },
     {
       title: "工具设计是一门学科",
-      body: "工具是模型与世界的接口，描述即提示词。好工具：语义清晰、参数正交、返回信息密度高、错误可恢复、幂等。差工具（返回一大坨无关文本）会污染上下文、诱导模型误判。『给模型一把剪刀』远好于『给它一个瑞士军刀+说明书』。",
+      body: "工具是模型与世界的接口，描述即提示词。好工具：语义清晰、参数正交、返回信息密度高、错误可恢复、幂等。差工具（返回一大坨无关文本）会污染上下文、诱导模型误判。『给模型一把剪刀』远好于『给它一个瑞士军刀+说明书』。好坏对比：❌ read_file 返回全文——模型要读完 2000 行才能找到目标函数；✅ grep(pattern, line_range) 只回匹配行+上下文，3 行拿到答案。返回值设计原则：带行号、给摘要、只回相关字段——省 token 更省注意力。",
     },
     {
       title: "护栏：机制 vs 政策",
@@ -177,7 +181,11 @@ export const HARNESS: Concept = {
     },
     {
       title: "可观测性与『黄灯』问题",
-      body: "Agent 会自信地做错误的事（confidently wrong），不像程序会崩。需要 tracing（每步 input/output/tool）、成本与 token 监控、以及『及时交还控制权』的兜底——找不到路时要会停下求助，而不是原地打转。",
+      body: "Agent 会自信地做错误的事（confidently wrong），不像程序会崩。可观测性三件套：① Tracing——每步记录输入/输出/工具调用/耗时，用 OpenTelemetry + Langfuse 可回放完整轨迹；② 成本监控——每轮 token × 单价实时算账，防止半夜跑爆预算；③ 偏离检测——开始时让模型写下 plan，结束时对比 plan 与实际动作。实测经验：没有 tracing 排一个 Agent bug 平均 2 小时，有完整轨迹回放 15 分钟定位。",
+    },
+    {
+      title: "容错与重试的分层设计",
+      body: "工具失败 ≠ 任务失败：网络超时重试（指数退避 1s/2s/4s）、权限不足升级求助、参数错误换方式重调——错误要分类处置而不是一律重跑。必须有 max_turns + 预算上限兜底，重试耗尽后输出诊断报告交还人类，而不是原地打转烧钱。",
     },
     {
       title: "Scaffold vs Harness 的措辞",
