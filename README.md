@@ -2,9 +2,9 @@
 
 > 一条主线讲透 AI 为什么突然能「做事」了：从 Transformer 到 Agent 工程体系，配上 Three.js 粒子背景、SVG 动画图解和可交互的演示。
 
-![CI](https://github.com/OWNER/ai-learning-platform/actions/workflows/ci.yml/badge.svg) ![License](https://img.shields.io/badge/license-MIT-green) ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![CI](https://github.com/StarrySea1412/ai-learning-platform/actions/workflows/ci.yml/badge.svg) ![License](https://img.shields.io/badge/license-MIT-green) ![Next.js](https://img.shields.io/badge/Next.js-14-black) ![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOWNER%2Fai-learning-platform)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FStarrySea1412%2Fai-learning-platform)
 
 ## 🖼 截图
 
